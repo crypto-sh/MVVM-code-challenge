@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="product"
+            type="com.core.dto.ProductModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.DetailActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@{product.name}"
+                app:contentInsetStart="0dp"
+                app:contentInsetEnd="0dp"
+                app:layout_collapseMode="pin"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <com.core.widget.ImageViewCustom
+                android:id="@+id/imgProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/itemMargin"
+                android:padding="@dimen/itemMargin"
+                android:scaleType="fitXY"
+                image="@{product.url}"
+                app:isSquare="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <com.core.widget.TextViewCustom
+                android:id="@+id/textPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/itemMargin"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                price="@{product.salePrice}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/imgProduct"
+                app:layout_constraintTop_toBottomOf="@id/imgProduct"
+                tools:text="@tools:sample/lorem" />
+
+            <com.core.widget.TextViewCustom
+                android:id="@+id/textDescription"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:padding="@dimen/itemMargin"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:text="@{product.description}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/textPrice"
+                app:layout_constraintTop_toBottomOf="@id/textPrice"
+                tools:text="@tools:sample/lorem" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="product"
+            type="com.core.dto.ProductModel" />
+        <variable
+            name="holder"
+            type="com.mobiquity.adapter.MainListAdapter.Holder" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_product"
+            android:layout_width="match_parent"
+            android:layout_height="108dp"
+            android:onClick="@{() -> holder.onItemSelected(product)}"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <com.core.widget.ImageViewCustom
+                android:id="@+id/imgProduct"
+                image="@{product.url}"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="@dimen/itemMargin"
+                android:padding="@dimen/itemMargin"
+                android:scaleType="fitXY"
+                app:isSquare="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <com.core.widget.TextViewCustom
+                android:id="@+id/textName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/itemMargin"
+                android:text="@{product.name}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imgProduct"
+                app:layout_constraintTop_toTopOf="@id/imgProduct"
+                tools:text="@tools:sample/lorem" />
+
+            <com.core.widget.TextViewCustom
+                android:id="@+id/textPrice"
+                price="@{product.salePrice}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/itemMargin"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/textName"
+                app:layout_constraintTop_toBottomOf="@id/textName"
+                tools:text="@tools:sample/lorem" />
+
+            <com.core.widget.TextViewCustom
+                android:id="@+id/textDescription"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:padding="@dimen/itemMargin"
+                android:text="@{product.description}"
+                android:textColor="@color/gray"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/imgProduct"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/textName"
+                app:layout_constraintTop_toBottomOf="@id/textPrice"
+                tools:text="@tools:sample/lorem" />
+
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </RelativeLayout>
+
+
+</layout>

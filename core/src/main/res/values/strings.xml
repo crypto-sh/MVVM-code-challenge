@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Core</string>
+
+    <string name="undefine">Undefine Error Happened</string>
+    <string name="network">Internet Connection Error</string>
+    <string name="ioException">IO Exception</string>
+    <string name="authorization">Authorization Error</string>
+    <string name="Forbidden">User Forbidden</string>
+    <string name="httpException">Http Error</string>
+    <string name="eofException">Runtime Exception</string>
+    <string name="runtimeException">Runtime Exception</string>
+    <string name="jsonFormat">Json Format exception</string>
+
+</resources>

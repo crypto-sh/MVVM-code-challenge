@@ -1,0 +1,102 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion sdk.compileSdk
+    defaultConfig {
+        minSdkVersion sdk.minSdk
+        targetSdkVersion sdk.targetSDk
+        versionCode sdk.versionCode
+        versionName sdk.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug{
+            buildConfigField("boolean", "enableDebugLogging", "true")
+            buildConfigField("String", "baseUrl", "\"http://mobcategories.s3-website-eu-west-1.amazonaws.com\"")
+        }
+        release {
+            minifyEnabled false
+            buildConfigField("boolean", "enableDebugLogging", "false")
+            buildConfigField("String", "baseUrl", "\"http://mobcategories.s3-website-eu-west-1.amazonaws.com\"")
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    /**
+     * Support
+     */
+    implementation deps.kotlin
+    implementation deps.appCompat
+
+    /**
+     * LifeCycle
+     */
+    implementation deps.lifeCycle_ext
+    implementation deps.lifeCycle_run
+    kapt deps.lifeCycle_kapt
+
+    /**
+     * Retrofit
+     */
+    implementation deps.gson
+    implementation deps.retrofit
+    implementation deps.retrofit_con
+    implementation deps.okhttp
+    implementation deps.retrofit_rx
+
+    /**
+     * RxJava
+     */
+    implementation deps.rxAndroid
+    implementation deps.rxJava
+
+    /**
+     * Image loader -- Glide
+     */
+    implementation deps.glide
+    implementation deps.glide_okhttp
+    kapt deps.glide_kapt
+
+    /**
+     * Dependency Injection
+     */
+    implementation deps.dagger
+    kapt deps.dagger_Kapt
+
+
+    /**
+     * TEST
+     */
+    /**
+     * TEST
+     */
+    testImplementation deps.junit
+    androidTestImplementation deps.core
+    androidTestImplementation deps.rules
+    androidTestImplementation deps.runner
+    androidTestImplementation deps.ext_junit
+    androidTestImplementation deps.core_test
+    androidTestImplementation deps.espresso
+    androidTestImplementation deps.espresso_cont
+}

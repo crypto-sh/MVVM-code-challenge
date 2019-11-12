@@ -1,0 +1,109 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+
+def propFile = file('../sign.properties')
+Properties props = new Properties()
+props.load(new FileInputStream(propFile))
+
+android {
+    signingConfigs {
+        playStore {
+            storeFile file(props['storePath'])
+            storePassword props['storePassword']
+            keyPassword props['keyPassword']
+            keyAlias = props['keyAlias']
+        }
+    }
+    compileSdkVersion sdk.compileSdk
+    buildToolsVersion sdk.buildTools
+    defaultConfig {
+        applicationId "com.mobiquity"
+        minSdkVersion sdk.minSdk
+        targetSdkVersion sdk.targetSDk
+        versionCode sdk.versionCode
+        versionName sdk.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.playStore
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+    externalNativeBuild {
+        cmake {
+            path file('CMakeLists.txt')
+        }
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    androidExtensions {
+        experimental = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    /**
+     * Support
+     */
+    implementation deps.kotlin
+    implementation deps.appCompat
+    implementation deps.recycler
+    implementation deps.constraint
+    implementation deps.material
+
+    /**
+     * RxJava
+     */
+    implementation deps.rxAndroid
+    implementation deps.rxJava
+
+    /**
+     * Dependency Injection
+     */
+    implementation deps.dagger
+    kapt deps.dagger_Kapt
+
+    /**
+     * Room Database
+     */
+    implementation deps.room
+    kapt deps.room_kapt
+
+    /**
+     * Gson
+     */
+    implementation deps.gson
+
+    /**
+     * TEST
+     */
+    testImplementation deps.junit
+    debugImplementation deps.fragment_test
+    androidTestImplementation deps.core
+    androidTestImplementation deps.rules
+    androidTestImplementation deps.runner
+    androidTestImplementation deps.ext_junit
+    androidTestImplementation deps.core_test
+    androidTestImplementation deps.espresso
+    androidTestImplementation deps.espresso_cont
+
+    /**
+     * Module dependency
+     */
+    implementation project(path: ':core')
+}
