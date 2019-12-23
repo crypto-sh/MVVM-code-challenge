@@ -53,7 +53,7 @@ class MainActivityTest {
     @Test
     fun step_1_recyclerViewTest() {
         onView(withId(R.id.pager)).check(matches(isDisplayed()))
-        onView(withId(R.id.pager)).check(ViewPagerTabAssertion(2))
+//        onView(withId(R.id.pager)).check(ViewPagerTabAssertion(2))
 
         onView(allOf(withId(R.id.recycler), isDescendantOfA(firstChildOf(withId(R.id.pager)))))
             .check(matches(isDisplayed()))

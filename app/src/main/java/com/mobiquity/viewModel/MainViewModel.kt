@@ -1,17 +1,14 @@
 package com.mobiquity.viewModel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.core.base.BaseViewModel
 import com.core.dto.CategoryModel
 import com.core.dto.NetworkState
 import com.core.dto.ProductModel
-
 import com.core.utils.SingleLiveEvent
 import com.mobiquity.data.ListResponse
 import com.mobiquity.repositories.MainRepository
-import io.reactivex.Single
 
 
 abstract class MainViewModel : BaseViewModel() {
